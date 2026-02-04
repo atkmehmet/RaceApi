@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaceApi.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a3c1b986ef9cd91d89b9211d292e28fd152de80")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a50f5f89f81c3243122388d30e1742f4923cd2fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaceApi.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaceApi.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

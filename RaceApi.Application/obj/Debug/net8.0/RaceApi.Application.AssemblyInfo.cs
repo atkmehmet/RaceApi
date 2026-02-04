@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaceApi.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1abb43aa17ba5f4c6b32bd1aa62790c715f29a1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a50f5f89f81c3243122388d30e1742f4923cd2fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaceApi.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaceApi.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
