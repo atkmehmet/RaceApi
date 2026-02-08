@@ -10,14 +10,13 @@ namespace RaceApi.Application.Common
     {
         public Boolean State { get; set; }
 
-        public List<ValidationError> Errors { get; set; }
-
+        
         public T? Data { get; set; }
 
-        public Result(bool state, T? data, List<ValidationError> errors = null)
+        public Result(bool state, T? data)
         {
             State = state;
-            Errors = errors;
+        
             Data = data;
         }
 
@@ -27,14 +26,11 @@ namespace RaceApi.Application.Common
             return new Result<T>(true,data);
              }
 
-        public static Result<T> Failure(List<ValidationError> errors) {
+        public static Result<T> Failure(T? data) {
 
-            return new Result<T>(false,default,errors);
+            return new Result<T>(false,data);
         }
 
-        public static Result<T> Failure(ValidationError error) { 
         
-            return new Result<T>(false,default,)
-        }
 }
 }
