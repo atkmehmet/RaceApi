@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eWdUD85v++U=",
+  "dgSpecHash": "4XSmauLpabg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\Desktop\\VisulStudio\\RaceApi\\RaceApi.Application\\RaceApi.Application.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Asus\\.nuget\\packages\\fluentvalidation\\11.5.0\\fluentvalidation.11.5.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.0\\fluentvalidation.dependencyinjectionextensions.11.5.0.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Proje\\komosk-board\\serverNew\\RaceApi.Application\\RaceApi.Application.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

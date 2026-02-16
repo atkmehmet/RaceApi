@@ -7,13 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.5.0" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.0" />
+    <ProjectReference Include="..\RaceApi.Domain\RaceApi.Domain.csproj" />
   </ItemGroup>
 
 </Project>
