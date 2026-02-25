@@ -1,4 +1,5 @@
-﻿using RaceApi.Domain.Entities;
+﻿using RaceApi.Application.Common;
+using RaceApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace RaceApi.Application.Interface
 {
     public interface IUserService
     {
-        Task AddUser(User user);
+        Task<Result<bool>> AddUser(User user);
 
-        Task DeleteUser(User user);
+        Task<Result<bool>> UpdateUser(User user);
 
-        Task UpdateUser(User user);
-        Task<IEnumerable<User>> GetAllUsers();
+        Task<Result<bool>> DeleteUser(int id);
 
+        Task<Result<List<User>>> GetAllUsers();
+
+        Task<Result<User?>> GetUserById(int id);
     }
 }

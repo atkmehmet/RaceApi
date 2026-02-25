@@ -1,15 +1,17 @@
-﻿using System;
+﻿using RaceApi.Application.Common;
+using RaceApi.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
-using RaceApi.Domain.Entities;
 namespace RaceApi.Application.Interface
 {
     public interface ICarService
     {
-        Task<IEnumerable<Car>> GetAllAsync();
-        Task<Car> CreateAsync(Car car);
+        Task<Result<List<Car>>> GetAllCars();
+
+        Task<Result<Car>> AddCar(Car car);
     }
 }

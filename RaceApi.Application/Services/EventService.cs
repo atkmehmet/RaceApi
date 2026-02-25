@@ -10,81 +10,80 @@ using System.Threading.Tasks;
 
 namespace RaceApi.Application.Services
 {
-    public class UserService : IUserService
+    public class EventService : IEventService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IEventRepository _eventRepository;
 
-        public UserService(IUserRepository userRepository)
+        public EventService(IEventRepository eventRepository)
         {
-            _userRepository = userRepository;
+            _eventRepository = eventRepository;
         }
 
-        public async Task<Result<bool>> AddUser(User user)
+        public async Task<Result<bool>> AddEvent(Event eventEntity)
         {
             try
             {
-                await _userRepository.AddUser(user);
+                await _eventRepository.CreateAsync(eventEntity);
                 return Result<bool>.Success(true);
             }
             catch (Exception ex)
             {
-                return Failure<bool>(ex, "AddUser");
+                return Failure<bool>(ex, "AddEvent");
             }
         }
 
-        public async Task<Result<bool>> UpdateUser(User user)
+        public async Task<Result<bool>> UpdateEvent(Event eventEntity)
         {
             try
             {
-                await _userRepository.UpdateUser(user);
+                await _eventRepository.UpdateAsync(eventEntity);
                 return Result<bool>.Success(true);
             }
             catch (Exception ex)
             {
-                return Failure<bool>(ex, "UpdateUser");
+                return Failure<bool>(ex, "UpdateEvent");
             }
         }
 
-        public async Task<Result<bool>> DeleteUser(int id)
+        public async Task<Result<bool>> DeleteEvent(int id)
         {
             try
             {
-                await _userRepository.DeleteUser(id);
+                await _eventRepository.DeleteAsync(id);
                 return Result<bool>.Success(true);
             }
             catch (Exception ex)
             {
-                return Failure<bool>(ex, "DeleteUser");
+                return Failure<bool>(ex, "DeleteEvent");
             }
         }
 
-        public async Task<Result<List<User>>> GetAllUsers()
+        public async Task<Result<List<Event>>> GetAllEvents()
         {
             try
             {
-                var users = await _userRepository.GetUsers();
-                return Result<List<User>>.Success(users.ToList());
+                var result = await _eventRepository.GetAllAsync();
+                return Result<List<Event>>.Success(result.ToList());
             }
             catch (Exception ex)
             {
-                return Failure<List<User>>(ex, "GetAllUsers");
+                return Failure<List<Event>>(ex, "GetAllEvents");
             }
         }
 
-        public async Task<Result<User?>> GetUserById(int id)
+        public async Task<Result<Event?>> GetEventById(int id)
         {
             try
             {
-                var user = await _userRepository.GetById(id);
-                return Result<User?>.Success(user);
+                var result = await _eventRepository.GetByIdAsync(id);
+                return Result<Event?>.Success(result);
             }
             catch (Exception ex)
             {
-                return Failure<User?>(ex, "GetUserById");
+                return Failure<Event?>(ex, "GetEventById");
             }
         }
 
-        // Private Error Helper
         private Result<T> Failure<T>(Exception ex, string field)
         {
             return Result<T>.Failure(new List<ValidationError>

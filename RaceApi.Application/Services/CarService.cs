@@ -1,12 +1,13 @@
-﻿using RaceApi.Application.Interface;
+﻿using RaceApi.Application.Common;
+using RaceApi.Application.Interface;
+using RaceApi.Domain.Entities;
+using RaceApi.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
-using RaceApi.Domain.Interface;
-using RaceApi.Domain.Entities;
 
 namespace RaceApi.Application.Services
 {
@@ -19,26 +20,38 @@ namespace RaceApi.Application.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Car>> GetAllAsync()
+        public async Task<Result<List<Car>>> GetAllCars()
         {
-            return await _repository.GetCars();
+            try
+            {
+                var cars = await _repository.GetCars();
+                return Result<List<Car>>.Success(cars.ToList());
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Car>>.Failure(new List<ValidationError>
+            {
+                new ValidationError { fieldName = "GetAllCars", errorMessage = ex.Message }
+            });
+            }
         }
 
-        public async Task<Car> CreateAsync(Car car)
+        public async Task<Result<Car>> AddCar(Car car)
         {
-            try {
-                if (string.IsNullOrWhiteSpace(car.plate))
-                    throw new Exception("Plate boş olamaz");
+            try
+            {
+              
 
                 await _repository.AddCar(car);
-
-                return car;
+                return Result<Car>.Success(car);
             }
-            catch (Exception ex) {
-                throw new Exception();
+            catch (Exception ex)
+            {
+                return Result<Car>.Failure(new List<ValidationError>
+            {
+                new ValidationError { fieldName = "AddCar", errorMessage = ex.Message }
+            });
             }
-            // Basit iş kuralı örneği
-
         }
     }
 }

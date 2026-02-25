@@ -1,4 +1,5 @@
-﻿using RaceApi.Domain.Entities;
+﻿using RaceApi.Application.Common;
+using RaceApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace RaceApi.Application.Interface
 {
+    
     public interface IPenaltyService
     {
-        Task<IEnumerable<Penalties>> GetAllAsync();
-        Task<Penalties> CreateAsync(Penalties penalties);
-        Task UpdateAsync(Penalties penalties);
+        Task<Result<bool>> AddPenalty(Penalties penalty);
+
+        Task<Result<bool>> UpdatePenalty(Penalties penalty);
+
+        
+
+        Task<Result<List<Penalties>>> GetAllPenalties();
+
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using RaceApi.Application.Interface;
+﻿using RaceApi.Application.Common;
+using RaceApi.Application.Interface;
 using RaceApi.Domain.Entities;
 using RaceApi.Domain.Interface;
 using System;
@@ -18,49 +19,80 @@ namespace RaceApi.Application.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Penalties>> GetAllAsync()
-        {
-            return await _repository.GetAll();
-        }
-
-        public async Task<Penalties> CreateAsync(Penalties penalties)
+        public async Task<Result<List<Penalties>>> GetAllPenalties()
         {
             try
             {
-                // 🔹 Basit Business Rules
+                var result = await _repository.GetAll();
+                return Result<List<Penalties>>.Success(result.ToList());
+            }
+            catch (Exception ex)
+            {
+                return Failure<List<Penalties>>(ex, "GetAllPenalties");
+            }
+        }
 
+        
+        public async Task<Result<bool>> AddPenalty(Penalties penalties)
+        {
+            try
+            {
+                // 🔹 Business Rules
                 if (penalties.runId <= 0)
-                    throw new Exception("RunId 0'dan büyük olmalı");
+                    return Result<bool>.Failure(new List<ValidationError>
+                {
+                    new ValidationError { fieldName = "runId", errorMessage = "RunId 0'dan büyük olmalı" }
+                });
 
                 if (penalties.timePenalty < 0)
-                    throw new Exception("Time penalty negatif olamaz");
+                    return Result<bool>.Failure(new List<ValidationError>
+                {
+                    new ValidationError { fieldName = "timePenalty", errorMessage = "Time penalty negatif olamaz" }
+                });
 
                 await _repository.AddPenalty(penalties);
-
-                return penalties;
+                return Result<bool>.Success(true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw; // hatayı ezmeyelim
+                return Failure<bool>(ex, "AddPenalty");
             }
         }
 
-        public async Task UpdateAsync(Penalties penalties)
+        public async Task<Result<bool>> UpdatePenalty(Penalties penalties)
         {
             try
             {
+                // 🔹 Business Rules
                 if (penalties.id <= 0)
-                    throw new Exception("Geçersiz Id");
+                    return Result<bool>.Failure(new List<ValidationError>
+                {
+                    new ValidationError { fieldName = "id", errorMessage = "Geçersiz Id" }
+                });
 
                 if (penalties.timePenalty < 0)
-                    throw new Exception("Time penalty negatif olamaz");
+                    return Result<bool>.Failure(new List<ValidationError>
+                {
+                    new ValidationError { fieldName = "timePenalty", errorMessage = "Time penalty negatif olamaz" }
+                });
 
                 await _repository.UpdatePenalty(penalties);
+                return Result<bool>.Success(true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return Failure<bool>(ex, "UpdatePenalty");
             }
+        }
+
+    
+        // 🔹 Private Error Helper
+        private Result<T> Failure<T>(Exception ex, string field)
+        {
+            return Result<T>.Failure(new List<ValidationError>
+        {
+            new ValidationError { fieldName = field, errorMessage = ex.Message }
+        });
         }
     }
 
